@@ -11,14 +11,26 @@
             text-align: center;
             width: 100px;
         }
+
+        picture.is-small {
+            width: 50px;
+        }
+
+        picture.is-large {
+            width: 200px;
+        }
+
         img {
             box-shadow: 0 0 15px #999;
             border-radius: 50%;
-            width: 100px;
+            width: 100%;
         }
+
         img.disabled {
             opacity: .3;
         }
+
+        
     </style>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
@@ -35,11 +47,21 @@
         const Avatar = props => {
             const [ enabled, setEnabled ] = useState(true);
             const src = `https://randomuser.me/api/portraits/women/${props.id}.jpg`;
-            const className = enabled ? '' : 'disabled'
+            
+            let pictureClassName = "";
+            if (props.size === "small") {
+                pictureClassName = "is-small";
+            } else if (props.size === "large") {
+                pictureClassName = "is-large";
+            }
+
+            const imgClassName = enabled ? '' : 'disabled'
 
             return (
-                <picture>
-                    <img onClick={() => setEnabled(!enabled) } className={className} src={src} />
+                <picture className={pictureClassName}>
+                    <img onClick={() => {
+                        setEnabled(!enabled)
+                    }} className={imgClassName} src={src} />
                     <strong>{props.name}</strong>
                 </picture>
             )
@@ -48,8 +70,9 @@
         
         ReactDOM.render(
             <div>
-                <Avatar id={10} name="Ana" />
-                <Avatar id={20} name="JSXLady"/>
+                <Avatar id={10} name="Ana" size="small" />
+                <Avatar id={11} name="JSXLady"/>
+                <Avatar id={12} name="Rodríguez" size="large" />
             </div>,
             $app
         );
