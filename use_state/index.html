@@ -47,6 +47,8 @@
         const Avatar = ({ id, name = '👩🏻‍💻', size }) => {
             const [ enabled, setEnabled ] = useState(true);
             
+            if (!id) return <img src="https://randomuser.me/api/portraits/lego/8.jpg" />;
+
             const src = `https://randomuser.me/api/portraits/women/${id}.jpg`;
             
             let pictureClassName = "";
@@ -75,6 +77,7 @@
                 <Avatar id={11} name="JSXLady"/>
                 <Avatar id={12} name="Rodríguez" size="large" />
                 <Avatar id={13} size="large"/>
+                <Avatar />
             </div>,
             $app
         );
