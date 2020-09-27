@@ -44,14 +44,15 @@
         const useState = React.useState;
         
 
-        const Avatar = props => {
+        const Avatar = ({ id, name = '👩🏻‍💻', size }) => {
             const [ enabled, setEnabled ] = useState(true);
-            const src = `https://randomuser.me/api/portraits/women/${props.id}.jpg`;
+            
+            const src = `https://randomuser.me/api/portraits/women/${id}.jpg`;
             
             let pictureClassName = "";
-            if (props.size === "small") {
+            if (size === "small") {
                 pictureClassName = "is-small";
-            } else if (props.size === "large") {
+            } else if (size === "large") {
                 pictureClassName = "is-large";
             }
 
@@ -62,7 +63,7 @@
                     <img onClick={() => {
                         setEnabled(!enabled)
                     }} className={imgClassName} src={src} />
-                    <strong>{props.name}</strong>
+                    <strong>{name}</strong>
                 </picture>
             )
         }
@@ -73,6 +74,7 @@
                 <Avatar id={10} name="Ana" size="small" />
                 <Avatar id={11} name="JSXLady"/>
                 <Avatar id={12} name="Rodríguez" size="large" />
+                <Avatar id={13} size="large"/>
             </div>,
             $app
         );
